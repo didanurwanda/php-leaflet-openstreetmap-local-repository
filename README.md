@@ -1,4 +1,4 @@
-# OpenStreetMap - Local Repository (Tile Downloader)
+# Leaflet OpenStreetMap - Local Repository (Tile Downloader)
 
 Simple tools for backing up tiles from OpenStreetMap and save to local storage.
 
