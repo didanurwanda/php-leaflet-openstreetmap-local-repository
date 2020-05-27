@@ -6,11 +6,11 @@ $app = new \Slim\Slim();
 $dbh = new \PDO('sqlite:'. dirname(__FILE__) .'/repository.db');
 
 $app->get('/tile/:s/:z/:x/:y', function ($s, $z, $x, $y) use ($app, $dbh) {
-    $stmt = $dbh->prepare('SELECT * FROM repo WHERE s = :s AND z = :z AND x = :x AND y = :y');
-    $stmt->bindParam(':s', $s, \PDO::PARAM_STR);
-    $stmt->bindParam(':z', $z, \PDO::PARAM_STR);
-    $stmt->bindParam(':x', $x, \PDO::PARAM_STR);
-    $stmt->bindParam(':y', $y, \PDO::PARAM_STR);
+    $stmt = $dbh->prepare('SELECT * FROM repo WHERE s = ? AND z = ? AND x = ? AND y = ?');
+    $stmt->bindParam(1, $s, \PDO::PARAM_STR);
+    $stmt->bindParam(2, $z, \PDO::PARAM_STR);
+    $stmt->bindParam(3, $x, \PDO::PARAM_STR);
+    $stmt->bindParam(4, $y, \PDO::PARAM_STR);
     $stmt->execute();
     $fetch = $stmt->fetch(\PDO::FETCH_OBJ);
     
@@ -34,19 +34,13 @@ $app->get('/tile/:s/:z/:x/:y', function ($s, $z, $x, $y) use ($app, $dbh) {
         
         if ($image) {
             $insert = $dbh->prepare('INSERT INTO repo(s, z, x, y, image) VALUES (?, ?, ?, ?, ?)');
-            $insert->execute([
-                $s,
-                $z, 
-                $x,
-                $y,
-                $image
-            ]);
+            $insert->execute([$s, $z, $x, $y, $image]);
         }
     }
     
     if ($image !== null) {
         $app->response->headers->set('Content-Type', 'image/png');
-        $app->response->headers->set('Content-Disposition', "inline;filename='map.png'");
+        $app->response->headers->set('Content-Disposition', "inline;filename=map.png");
         $app->response->headers->set('Content-Transfer-Encoding', 'binary');
 
         echo $image;
