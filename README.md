@@ -13,5 +13,5 @@ To
 
 ### Minimum Requirement
 
- - PHP 5.3
+ - PHP 5.4
  - pdo_sqlite
