@@ -6,11 +6,10 @@ $app = new \Slim\Slim();
 $dbh = new \PDO('sqlite:'. dirname(__FILE__) .'/repository.db');
 
 $app->get('/tile/:s/:z/:x/:y', function ($s, $z, $x, $y) use ($app, $dbh) {
-    $stmt = $dbh->prepare('SELECT * FROM repo WHERE s = ? AND z = ? AND x = ? AND y = ?');
-    $stmt->bindParam(1, $s, \PDO::PARAM_STR);
-    $stmt->bindParam(2, $z, \PDO::PARAM_STR);
-    $stmt->bindParam(3, $x, \PDO::PARAM_STR);
-    $stmt->bindParam(4, $y, \PDO::PARAM_STR);
+    $stmt = $dbh->prepare('SELECT * FROM repo WHERE z = ? AND x = ? AND y = ?');
+    $stmt->bindParam(1, $z, \PDO::PARAM_STR);
+    $stmt->bindParam(2, $x, \PDO::PARAM_STR);
+    $stmt->bindParam(3, $y, \PDO::PARAM_STR);
     $stmt->execute();
     $fetch = $stmt->fetch(\PDO::FETCH_OBJ);
     
