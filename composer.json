@@ -1,0 +1,12 @@
+{
+    "name": "didanurwanda/openstreetmap",
+    "authors": [
+        {
+            "name": "Dida Nurwanda",
+            "email": "didanurwanda@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "2.*"
+    }
+}
