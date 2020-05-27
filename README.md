@@ -9,3 +9,9 @@ You only need to replace the following link:
 To
 
     http://<your-link>/tile/{s}/{z}/{x}/{y}
+
+
+### Minimum Requirement
+
+ - PHP 5.3
+ - pdo_sqlite
